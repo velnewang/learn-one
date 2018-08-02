@@ -1,0 +1,8 @@
+# Eclipse Workspace
+/.metadata/
+/.recommenders/
+/RemoteSystemsTempFiles/
+/Servers/
+
+# Custom
+/TEST*/
