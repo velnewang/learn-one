@@ -12,13 +12,13 @@ class Radix62ConverterTest {
 
     @ParameterizedTest
     @MethodSource
-    void testToRadix(int decimal, String radix62) {
+    void testToRadix(long decimal, String radix62) {
         assertEquals(Radix62Converter.toRadix(decimal), radix62);
     }
 
     @ParameterizedTest
     @MethodSource
-    void testToDecimal(String radix62, int decimal) {
+    void testToDecimal(String radix62, long decimal) {
         assertEquals(Radix62Converter.toDecimal(radix62), decimal);
     }
 
@@ -33,69 +33,79 @@ class Radix62ConverterTest {
                 //
                 Arguments.of(-1, null),
                 //
-                Arguments.of(0, "0"),
+                Arguments.of(0L, "0"),
                 //
-                Arguments.of(1, "1"),
+                Arguments.of(1L, "1"),
                 //
-                Arguments.of(61, "Z"),
+                Arguments.of(61L, "Z"),
                 //
-                Arguments.of(62, "10"),
+                Arguments.of(62L, "10"),
                 //
-                Arguments.of(3843, "ZZ"),
+                Arguments.of(3843L, "ZZ"),
                 //
-                Arguments.of(238327, "ZZZ"),
+                Arguments.of(238327L, "ZZZ"),
                 //
-                Arguments.of(14776335, "ZZZZ"),
+                Arguments.of(14776335L, "ZZZZ"),
                 //
-                Arguments.of(916132831, "ZZZZZ"),
+                Arguments.of(916132831L, "ZZZZZ"),
                 //
-                Arguments.of(916132831 + 1, null),
+                Arguments.of(Integer.MAX_VALUE, "2lkCB1"),
                 //
-                Arguments.of(Integer.MAX_VALUE, null)
+                Arguments.of(56800235583L, "ZZZZZZ"),
+                //
+                Arguments.of(13984563473216086L, "1234567890"),
+                //
+                Arguments.of(839299365868340223L, "ZZZZZZZZZZ"),
+                //
+                Arguments.of(839299365868340223L + 1L, null),
+                //
+                Arguments.of(Long.MAX_VALUE, null)
 
-        );
-        // Arguments.of(Integer.MAX_VALUE, "2lkCB1"),
-        // Arguments.of(56800235583L,"ZZZZZZ"),
-        // Arguments.of(839299365868340223L, "ZZZZZZZZZZ"),
         // Arguments.of(Long.MAX_VALUE, "aZl8N0y58M7"),
+        );
     }
 
     static Stream<Arguments> testToDecimal() {
         return Stream.of(
                 //
-                Arguments.of("+", -3),
+                Arguments.of("+", -3L),
                 //
-                Arguments.of("", -2),
+                Arguments.of("", -2L),
                 //
-                Arguments.of(null, -1),
+                Arguments.of(null, -1L),
                 //
-                Arguments.of("0", 0),
+                Arguments.of("0", 0L),
                 //
-                Arguments.of("1", 1),
+                Arguments.of("1", 1L),
                 //
-                Arguments.of("Z", 61),
+                Arguments.of("Z", 61L),
                 //
-                Arguments.of("10", 62),
+                Arguments.of("10", 62L),
                 //
-                Arguments.of("ZZ", 3843),
+                Arguments.of("ZZ", 3843L),
                 //
-                Arguments.of("ZZZ", 238327),
+                Arguments.of("ZZZ", 238327L),
                 //
-                Arguments.of("ZZZZ", 14776335),
+                Arguments.of("ZZZZ", 14776335L),
                 //
-                Arguments.of("ZZZZZ", 916132831),
+                Arguments.of("ZZZZZ", 916132831L),
                 //
-                Arguments.of("100000", -2),
+                Arguments.of("2lkCB1", Integer.MAX_VALUE),
                 //
-                Arguments.of("123456", -2),
+                Arguments.of("ZZZZZZ", 56800235583L),
                 //
-                Arguments.of("+-+-+-", -2)
+                Arguments.of("1234567890", 13984563473216086L),
+                //
+                Arguments.of("ZZZZZZZZZZ", 839299365868340223L),
+                //
+                Arguments.of("10000000000", -2L),
+                //
+                Arguments.of("12345678901", -2L),
+                //
+                Arguments.of("+-+-+-+-+-+", -2L)
 
-        );
-        // Arguments.of("2lkCB1", Integer.MAX_VALUE),
-        // Arguments.of("ZZZZZZ", 56800235583L),
-        // Arguments.of("ZZZZZZZZZZ", 839299365868340223L),
         // Arguments.of("aZl8N0y58M7", Long.MAX_VALUE),
+        );
     }
 
 }
