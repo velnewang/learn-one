@@ -6,9 +6,9 @@ public class Radix62Converter {
     private static final char[] DIGITS = DIGITS_STRING.toCharArray();
     private static final int RADIX = DIGITS.length;
 
-    public static String toRadix(int decNumber) {
+    public static String toRadix(long decNumber) {
         // check.
-        if (decNumber < 0 || decNumber > 916132831) {
+        if (decNumber < 0 || decNumber > 839299365868340223L) {
             return null;
         }
         // calculate.
@@ -20,14 +20,14 @@ public class Radix62Converter {
         return sb.reverse().toString();
     }
 
-    public static int toDecimal(String radixNumber) {
+    public static long toDecimal(String radixNumber) {
         // check: null.
         if (radixNumber == null) {
-            return -1;
+            return -1L;
         }
         // check: length
-        if (radixNumber.length() == 0 || radixNumber.length() > 5) {
-            return -2;
+        if (radixNumber.length() == 0 || radixNumber.length() > 10) {
+            return -2L;
         }
         //
         char[] radixChars = radixNumber.toCharArray();
@@ -42,7 +42,7 @@ public class Radix62Converter {
                 }
             }
             if (charIllegal) {
-                return -3;
+                return -3L;
             }
         }
         // reverse char array.
@@ -51,11 +51,11 @@ public class Radix62Converter {
             chars[i] = radixChars[radixChars.length - i - 1];
         }
         // calculate.
-        int result = 0;
+        long result = 0;
         for (int figure = 0; figure < chars.length; figure++) {
             for (int i = 0; i < RADIX; i++) {
                 if (DIGITS[i] == chars[figure]) {
-                    result += i * (int) Math.pow(RADIX, figure);
+                    result += i * (long) Math.pow(RADIX, figure);
                 }
             }
         }
