@@ -1,0 +1,32 @@
+{
+  "persons" : [ {
+    "id" : 1001,
+    "name" : "The One",
+    "attributes" : [ 5, 5, 5, 5, 5 ],
+    "traits" : [ ]
+  }, {
+    "id" : 9527,
+    "name" : "The Commander",
+    "attributes" : [ 8, 12, 8, 8, 8 ],
+    "traits" : [ ]
+  } ],
+  "armies" : [ {
+    "id" : 4,
+    "name" : "Fourth Army",
+    "branchs" : [ {
+      "id" : 4002,
+      "type" : "Heavy Light",
+      "troops" : [ {
+        "home" : 404,
+        "date" : "769.1.1",
+        "squads" : {
+          "HI" : 200,
+          "LI" : 300
+        }
+      } ],
+      "leader" : 9527
+    } ],
+    "arrange" : [ 2 ],
+    "location" : 404
+  } ]
+}
