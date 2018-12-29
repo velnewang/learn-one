@@ -1,0 +1,11 @@
+#server:
+#  port: *port*
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:*port*/*database*?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#    username: *username*
+#    password: *password*
+#  mvc:
+#    favicon:
+#      enabled: false

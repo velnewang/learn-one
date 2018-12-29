@@ -1,6 +1,6 @@
-package win.velne.learnone.shorturl;
+package win.velne.learnone.shorturl.util;
 
-public class Radix62Converter {
+public class Radix62Utils {
 
     private static final String DIGITS_STRING = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final char[] DIGITS = DIGITS_STRING.toCharArray();

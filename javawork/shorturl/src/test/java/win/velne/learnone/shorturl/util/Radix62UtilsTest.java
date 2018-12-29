@@ -1,4 +1,4 @@
-package win.velne.learnone.shorturl;
+package win.velne.learnone.shorturl.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,18 +8,18 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class Radix62ConverterTest {
+class Radix62UtilsTest {
 
     @ParameterizedTest
     @MethodSource
     void testToRadix(long decimal, String radix62) {
-        assertEquals(Radix62Converter.toRadix(decimal), radix62);
+        assertEquals(Radix62Utils.toRadix(decimal), radix62);
     }
 
     @ParameterizedTest
     @MethodSource
     void testToDecimal(String radix62, long decimal) {
-        assertEquals(Radix62Converter.toDecimal(radix62), decimal);
+        assertEquals(Radix62Utils.toDecimal(radix62), decimal);
     }
 
     static Stream<Arguments> testToRadix() {
