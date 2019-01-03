@@ -1,10 +1,16 @@
 package win.velne.learnone.shorturl.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import win.velne.learnone.shorturl.entity.Shorturl;
@@ -36,7 +42,13 @@ public class ShorturlController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String generate(@RequestBody String url) {
-        System.out.println(url);
+        try {
+            url = URLDecoder.decode(url, "utf-8");
+            System.out.println(url);
+            return url;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         long id = shorturlService.create("http://example/");
         if (id < 0L) {
             if (id == Stat.ILLEGAL_URL) {
