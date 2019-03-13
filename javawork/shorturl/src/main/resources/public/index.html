@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+    .width42 {
+      max-width: 42em;
+    }
+  </style>
+
+  <title>短网址</title>
+</head>
+
+<body class="text-center bg-light">
+
+  <div class="container d-flex mx-auto flex-column width42">
+
+    <header class="mt-auto mb-auto">
+      <h1 class="heading">生成短网址</h1>
+    </header>
+
+    <main class="mb-auto">
+      <form id="form1" action="http://short.velne.win/create" method="GET">
+        <div class="input-group">
+          <input type="text" class="form-control" id="formInput" name="url" placeholder="输入网址">
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">获得短网址</button>
+          </div>
+        </div>
+      </form>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal fade" id="resualtModal" tabindex="-1" role="dialog" aria-labelledby="resualtModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="resualtModalLabel">短网址为...</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="关闭">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="resualtModalData">
+            http://velne.win/
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">完成</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="mt-auto mb-auto">
+      <p class="lead">试验版。</p>
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById("form1").onsubmit = checkForm;
+
+    function checkForm() {
+      var api2url = "http://short.velne.win/";
+      var api2short = "http://short.velne.win/create?url=";
+      var xmlhttp;
+      if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+      } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          var resualt = "" + xmlhttp.responseText;
+          var tip;
+          if (resualt.length == 5) {
+            tip = api2url + resualt;
+            tip = "<a href=\"" + tip + "\" target=\"_blank\">" + tip + "</a>";
+          } else {
+            tip = "出错了";
+          }
+          $('#resualtModalData').html(tip);
+          $('#resualtModal').modal('show');
+        }
+      }
+      xmlhttp.open("GET", api2short + $('#formInput')[0].value, true);
+      xmlhttp.send();
+      return false;
+    }
+  </script>
+
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

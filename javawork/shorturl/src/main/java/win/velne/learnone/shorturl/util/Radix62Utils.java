@@ -52,10 +52,10 @@ public class Radix62Utils {
         }
         // calculate.
         long result = 0;
-        for (int figure = 0; figure < chars.length; figure++) {
+        for (int finger = 0; finger < chars.length; finger++) {
             for (int i = 0; i < RADIX; i++) {
-                if (DIGITS[i] == chars[figure]) {
-                    result += i * (long) Math.pow(RADIX, figure);
+                if (DIGITS[i] == chars[finger]) {
+                    result += i * (long) Math.pow(RADIX, finger);
                 }
             }
         }

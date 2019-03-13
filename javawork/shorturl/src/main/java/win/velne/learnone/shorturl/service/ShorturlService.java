@@ -36,9 +36,10 @@ public class ShorturlService {
         if (shorturl != null) {
             if (url.equals(shorturl.getUrl())) {
                 // WARN: Repeat URL.
+                System.out.println("+++ REPEAT URL: " + url);
                 return id;
             } else {
-                System.out.println("+++HASH COLLISION");
+                System.out.println("+++!!! HASH COLLISION: " + url);
                 return Stat.HASH_COLLISION;
             }
         } else if (shorturl == null) {
