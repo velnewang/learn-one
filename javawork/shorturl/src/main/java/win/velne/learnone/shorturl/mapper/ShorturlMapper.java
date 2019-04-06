@@ -29,7 +29,7 @@ public interface ShorturlMapper {
     )
     void insert(Shorturl shorturl);
 
-    @Delete("DELET FROM `shorturl` WHERE id=#{id}")
+    @Delete("DELETE FROM `shorturl` WHERE id=#{id}")
     void deleteById(long id);
 
 }
