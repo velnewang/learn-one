@@ -1,0 +1,11 @@
+[Unit]
+Description=shorturl
+
+[Service]
+Type=forking
+ExecStart=/root/javaweb/shorturl/shorturl-start.sh
+ExecStop=/root/javaweb/shorturl/shorturl-stop.sh
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
