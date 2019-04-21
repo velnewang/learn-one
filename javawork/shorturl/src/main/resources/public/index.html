@@ -34,11 +34,12 @@
     </header>
 
     <main class="mb-auto">
-      <form id="form1" action="http://short.velne.win/create" method="GET">
+      <!-- <form id="form1" action="https://short.velne.win/create" method="GET"> -->
+      <form id="form1" method="GET">
         <div class="input-group">
           <input type="text" class="form-control" id="formInput" name="url" placeholder="输入网址">
           <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">获得短网址</button>
+            <button type="submit" class="btn btn-primary" id="formButton">获得短网址</button>
           </div>
         </div>
       </form>
@@ -56,7 +57,7 @@
             </button>
           </div>
           <div class="modal-body" id="resualtModalData">
-            http://velne.win/
+            https://velne.win/
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">完成</button>
@@ -71,18 +72,39 @@
 
   </div>
 
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
   <script>
     document.getElementById("form1").onsubmit = checkForm;
 
+    $('#resualtModal').on('hidden.bs.modal',
+      () => {
+        $('#formButton').prop('disabled', false);
+      })
+
     function checkForm() {
-      var api2url = "http://short.velne.win/";
-      var api2short = "http://short.velne.win/create?url=";
+      $('#formButton').prop('disabled', true);
+
+      var api2url = "https://short.velne.win/";
+      var api2short = "https://short.velne.win/create?url=";
       var xmlhttp;
+
+      var paramUrl = $('#formInput')[0].value;
+      var regex = new RegExp('https?:/{2}[^\\s]*');
+
+
       if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
       } else {
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-      }
+      };
       xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
           var resualt = "" + xmlhttp.responseText;
@@ -96,22 +118,19 @@
           $('#resualtModalData').html(tip);
           $('#resualtModal').modal('show');
         }
+      };
+      var legal_url = regex.test(paramUrl);
+      if (legal_url) {
+        xmlhttp.open("GET", api2short + paramUrl, true);
+        xmlhttp.send();
+      } else {
+        $('#resualtModalData').html("请输入正确的网址。");
+        $('#resualtModal').modal('show');
       }
-      xmlhttp.open("GET", api2short + $('#formInput')[0].value, true);
-      xmlhttp.send();
       return false;
     }
   </script>
 
-  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-  </script>
-  <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-  </script>
-  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-  </script>
 </body>
 
 </html>
