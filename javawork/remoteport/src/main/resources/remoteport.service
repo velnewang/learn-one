@@ -1,0 +1,11 @@
+[Unit]
+Description=remoteport
+
+[Service]
+Type=forking
+ExecStart=/root/javaweb/remoteport/remoteport-start.sh
+ExecStop=/root/javaweb/remoteport/remoteport-stop.sh
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
