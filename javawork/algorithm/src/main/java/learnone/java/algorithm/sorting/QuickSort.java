@@ -30,13 +30,13 @@ public class QuickSort implements Sortable {
         int pivot = array[low];
         while (low < high) {
             counts++;
-            if (low < high && array[high] >= pivot) {
+            while (low < high && array[high] >= pivot) {
                 high--;
             }
             if (low < high) {
                 array[low] = array[high];
             }
-            if (low < high && array[low] <= pivot) {
+            while (low < high && array[low] <= pivot) {
                 low++;
             }
             if (low < high) {
@@ -59,6 +59,7 @@ public class QuickSort implements Sortable {
 //        int[] disordered = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         sorter.sort(disordered);
         System.out.println(Arrays.toString(disordered));
+        System.out.print(Integer.MAX_VALUE-Integer.MIN_VALUE);
     }
 
 }

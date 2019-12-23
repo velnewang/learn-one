@@ -1,0 +1,13 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: spring-cloud-config-default
+  cloud:
+    config:
+      profile: default
+      server:
+        git:
+          uri: https://github.com/spring-cloud-samples/config-repo
+          search-paths: foo,bar

@@ -1,0 +1,12 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: spring-cloud-config-native
+  cloud:
+    config:
+      profile: default
+      server:
+        native:
+          version: noversion_default
+          search-locations: classpath:/cloudconfig/
