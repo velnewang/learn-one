@@ -1,15 +1,14 @@
 package learnone.java.algorithm.sorting;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class BubbleSort implements Sortable {
 
     int compare(int first, int second) {
-        if (first == second) {
-            return 0;
-        } else {
-            return (first < second) ? -1 : 1;
-        }
+        return (first == second) ? 0 : ((first > second) ? 1 : -1);
     }
 
     @Override
@@ -22,9 +21,9 @@ public class BubbleSort implements Sortable {
         boolean sequential = false;
         int counts = 0;
         int temp;
-        for (int i = 0; i < a.length; i++) {
+        for (int i = 1; i < a.length; i++) {
             sequential = true;
-            for (int j = 0; j < a.length - i - 1; j++) {
+            for (int j = 0; j < a.length - i; j++) {
                 counts++;
                 if (a[j] > a[j + 1]) {
                     temp = a[j];
@@ -45,14 +44,21 @@ public class BubbleSort implements Sortable {
 
         Sortable sorter = new BubbleSort();
 
-//        int[] disordered = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
-//        int[] disordered = { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3 };
-        int[] disordered = { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 3, 1, 4, 1, 5, 9, 2, 6, 5, 3 };
-//        int[] disordered = { 9 };
-//        int[] disordered = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-//        int[] disordered = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        sorter.sort(disordered);
-        System.out.println(Arrays.toString(disordered));
+//        int[] unordered = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+//        int[] unordered = { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3 };
+        int[] unordered = { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 3, 1, 4, 1, 5, 9, 2,
+                6, 5, 3, 3, 1, 4, 1, 5, 9, 2, 6, 5, 3 };
+//        int[] unordered = { 9 };
+//        int[] unordered = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+//        int[] unordered = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        Integer[] u3 = IntStream.of(unordered).boxed()
+                .collect(Collectors.toList()).toArray(new Integer[0]);
+        Collections.sort(Arrays.asList(u3), (i1, i2) -> {
+            return i1.equals(i2) ? 0 : (i1 > i2 ? 1 : -1);
+        });
+        sorter.sort(unordered);
+        System.out.println(Arrays.toString(unordered));
+        System.out.println(Arrays.toString(u3));
     }
 
 }

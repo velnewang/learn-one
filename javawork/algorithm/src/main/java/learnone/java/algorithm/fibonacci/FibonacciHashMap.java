@@ -12,7 +12,7 @@ public class FibonacciHashMap implements FibCalculable {
         memo.put(0, BigInteger.valueOf(0));
         memo.put(1, BigInteger.valueOf(1));
         memo.put(2, BigInteger.valueOf(1));
-        memo.put(3, BigInteger.valueOf(2));
+//        memo.put(3, BigInteger.valueOf(2));
         return f2(n);
     }
 
